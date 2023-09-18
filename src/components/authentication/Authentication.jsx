@@ -2,19 +2,20 @@
 import React, { useState } from "react";
 import styles from "./authentication.module.css";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 
 const Authentication = () => {
   const [open, setOpen] = useState(false);
-  //temporary
-  const status = "Authenticated";
+  
+  const {status} = useSession();
   return (
     <>
-      {status === "notAuthenticated" ? (
+      {status === "unauthenticated" ? (
         <Link href={"/login"} className={styles.link}>Login</Link>
       ) : (
         <>
           <Link href={"/write"} className={styles.link}>Write</Link>
-          <span className={styles.link}>Logout</span>
+          <span className={styles.link} onClick={signOut}>Logout</span>
         </>
       )}
       <div className={styles.burger} onClick={()=>setOpen(!open)}>
