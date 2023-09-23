@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
@@ -6,8 +5,9 @@ import Image from "next/image";
 import Card from "../card/Card";
 
 const getData = async (page, cat) => {
+  const apiURL = process.env.NEXTAUTH_URL
   const res = await fetch(
-    `http://localhost:3000/api/posts?page=${page}&cat=${cat || ""}`,
+    `${apiURL}/api/posts?page=${page}&cat=${cat || ""}`,
     {
       cache: "no-store",
     }

@@ -1,10 +1,12 @@
-"use client";
 import React from "react";
 import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
+
+
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/categories", {
+  const apiURL = process.env.NEXTAUTH_URL
+  const res = await fetch(apiURL+"/api/categories", {
     cache: "no-store",
   });
 
@@ -15,7 +17,6 @@ const getData = async () => {
 };
 const CategoryList = async () => {
   const data = await getData();
-  console.log(data,"hlhl");
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Category</h1>
